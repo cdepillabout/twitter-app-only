@@ -5,10 +5,15 @@ resolver: lts-8.7
 
 # Local packages, usually specified by relative directory name
 packages:
-- '.'
+    - '.'
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
-extra-deps: []
+extra-deps:
+    # This should be available in lts-9
+    - read-env-var-1.0.0.0
+    # This should be available in lts-9
+    - twitter-types-0.7.2.2
+
 
 # Override default flag values for local packages and extra-deps
 flags: {}

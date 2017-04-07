@@ -17,13 +17,18 @@ library
   hs-source-dirs:      src
   exposed-modules:     Web.Twitter.AppOnly
                      , Web.Twitter.AppOnly.Auth
+                     , Web.Twitter.AppOnly.Error
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , base64-bytestring
                      , bytestring
+                     , exceptions
+                     , from-sum
+                     , http-conduit
                      , http-types
-                     , read-env-var
+                     , read-env-var >= 1.0.0.0
                      , text
+                     , twitter-types
   default-language:    Haskell2010
   ghc-options:         -Wall -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
   other-extensions:    QuasiQuotes

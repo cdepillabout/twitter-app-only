@@ -1,7 +1,12 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Web.Twitter.AppOnly
   ( ConsumerKey(..)
@@ -31,35 +36,20 @@ module Web.Twitter.AppOnly
   , module Web.Twitter.Types
   ) where
 
-import Prelude hiding (undefined)
-
-import Control.FromSum (fromMaybeM)
-import Control.Exception (Exception(displayException))
-import Control.Lens ((^?))
-import Control.Monad.Catch (MonadCatch, MonadThrow(throwM), handle)
-import Control.Monad.IO.Class (MonadIO, liftIO)
-import Data.Aeson (FromJSON(..), Value, (.:), decode, withObject)
-import Data.Aeson.Types (Parser)
-import Data.Aeson.Lens (_String, key)
-import Data.ByteString (ByteString, pack)
+import Control.Monad.IO.Class (MonadIO)
+import Data.Aeson (FromJSON(..), decode)
+import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as B8
-import qualified Data.ByteString.Lazy as LBS
-import Data.ByteString.Base64 (encode)
 import Data.Data (Data)
-import Data.Maybe (fromMaybe)
 import Data.Monoid ((<>))
 import Data.String (IsString)
 import Data.Text (Text)
 import Data.Text.Encoding (encodeUtf8)
 import Data.Typeable (Typeable)
 import Network.HTTP.Simple
-       (HttpException, Request, Response, addRequestHeader,
-        defaultRequest, getResponseBody, httpJSON, httpLBS, parseRequest,
-        setRequestBodyLBS, setRequestHeaders, setRequestHost,
-        setRequestMethod, setRequestPath, setRequestPort,
+       (addRequestHeader, defaultRequest, getResponseBody, httpLBS,
+        setRequestHost, setRequestMethod, setRequestPath, setRequestPort,
         setRequestQueryString, setRequestSecure)
-import Network.HTTP.Types.URI (urlEncode)
-import System.ReadEnvVar (lookupEnv)
 import Web.Twitter.Types (SearchResult, Status)
 
 import Web.Twitter.AppOnly.Auth

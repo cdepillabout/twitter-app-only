@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -7,7 +8,7 @@ module Web.Twitter.AppOnly.Auth
   ( ConsumerKey(..)
   , ConsumerSecret(..)
   , Credentials(..)
-  , BearerToken
+  , BearerToken(..)
   , HasBearerToken(..)
   , CredentialsException(..)
   , credentialsFromEnv
@@ -16,22 +17,16 @@ module Web.Twitter.AppOnly.Auth
   , bearerTokenFromCreds
   ) where
 
-import Prelude hiding (undefined)
-
 import Control.FromSum (fromMaybeM)
 import Control.Exception (Exception(displayException))
-import Control.Lens ((^?))
 import Control.Monad.Catch (MonadCatch, MonadThrow(throwM), handle)
-import Control.Monad.IO.Class (MonadIO, liftIO)
+import Control.Monad.IO.Class (MonadIO)
 import Data.Aeson (FromJSON(..), Value, (.:), decode, withObject)
 import Data.Aeson.Types (Parser)
-import Data.Aeson.Lens (_String, key)
-import Data.ByteString (ByteString, pack)
-import qualified Data.ByteString.Char8 as B8
+import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as LBS
 import Data.ByteString.Base64 (encode)
 import Data.Data (Data)
-import Data.Maybe (fromMaybe)
 import Data.Monoid ((<>))
 import Data.String (IsString)
 import Data.Text (Text)
@@ -39,16 +34,13 @@ import Data.Text.Encoding (encodeUtf8)
 import Data.Typeable (Typeable)
 import Network.HTTP.Simple
        (HttpException, Request, Response, addRequestHeader,
-        defaultRequest, getResponseBody, httpJSON, httpLBS, parseRequest,
-        setRequestBodyLBS, setRequestHeaders, setRequestHost,
-        setRequestMethod, setRequestPath, setRequestPort,
-        setRequestQueryString, setRequestSecure)
+        defaultRequest, getResponseBody, httpLBS, setRequestBodyLBS,
+        setRequestHost, setRequestMethod, setRequestPath, setRequestPort,
+        setRequestSecure)
 import Network.HTTP.Types.URI (urlEncode)
 import System.ReadEnvVar (lookupEnv)
-import Web.Twitter.Types (SearchResult, Status)
 
--- import Text.Pretty.Simple
-
+import Web.Twitter.AppOnly.Error (TwitterError)
 
 newtype ConsumerKey = ConsumerKey
   { unConsumerKey :: ByteString
