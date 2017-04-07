@@ -28,6 +28,7 @@ library
                      , http-types
                      , read-env-var >= 1.0.0.0
                      , text
+                     , transformers
                      , twitter-types
   default-language:    Haskell2010
   ghc-options:         -Wall -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction

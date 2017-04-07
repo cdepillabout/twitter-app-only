@@ -52,13 +52,14 @@ matrix:
 
   # The Stack builds. We can pass in arbitrary Stack arguments via the ARGS
   # variable, such as using --stack-yaml to point to a different file.
-  - env: BUILD=stack ARGS="--resolver lts-6"
-    compiler: ": #stack 7.10.3 (lts-6)"
-    addons: {apt: {packages: [ghc-7.10.3,libgmp-dev], sources: [hvr-ghc]}}
+  #
+  # - env: BUILD=stack ARGS="--resolver lts-6"
+  #   compiler: ": #stack 7.10.3 (lts-6)"
+  #   addons: {apt: {packages: [ghc-7.10.3,libgmp-dev], sources: [hvr-ghc]}}
 
-  - env: BUILD=stack ARGS="--resolver lts-7"
-    compiler: ": #stack 8.0.1 (lts-7)"
-    addons: {apt: {packages: [ghc-8.0.1,libgmp-dev], sources: [hvr-ghc]}}
+  # - env: BUILD=stack ARGS="--resolver lts-7"
+  #   compiler: ": #stack 8.0.1 (lts-7)"
+  #   addons: {apt: {packages: [ghc-8.0.1,libgmp-dev], sources: [hvr-ghc]}}
 
   - env: BUILD=stack ARGS="--resolver lts-8"
     compiler: ": #stack 8.0.2 (lts-8)"
@@ -70,13 +71,13 @@ matrix:
     addons: {apt: {packages: [libgmp-dev]}}
 
   # Build on OS X in addition to Linux
-  - env: BUILD=stack ARGS="--resolver lts-6"
-    compiler: ": #stack 7.10.3 (lts-6) osx"
-    os: osx
+  # - env: BUILD=stack ARGS="--resolver lts-6"
+  #   compiler: ": #stack 7.10.3 (lts-6) osx"
+  #   os: osx
 
-  - env: BUILD=stack ARGS="--resolver lts-7"
-    compiler: ": #stack 8.0.1 (lts-7) osx"
-    os: osx
+  # - env: BUILD=stack ARGS="--resolver lts-7"
+  #   compiler: ": #stack 8.0.1 (lts-7) osx"
+  #   os: osx
 
   - env: BUILD=stack ARGS="--resolver lts-8"
     compiler: ": #stack 8.0.2 (lts-8) osx"
