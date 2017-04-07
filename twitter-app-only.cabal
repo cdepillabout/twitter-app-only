@@ -1,0 +1,56 @@
+name:                twitter-app-only
+version:             0.1.0.0
+synopsis:            Twitter API for Application-only authentication
+description:         Please see <https://github.com/cdepillabout/twitter-app-only#readme README.md>.
+homepage:            https://github.com/cdepillabout/twitter-app-only
+license:             BSD3
+license-file:        LICENSE
+author:              Dennis Gosnell
+maintainer:          cdep.illabout@gmail.com
+copyright:           2017 Dennis Gosnell
+category:            Text
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Web.Twitter.AppOnly
+                     , Web.Twitter.AppOnly.Auth
+  build-depends:       base >= 4.7 && < 5
+                     , aeson
+                     , base64-bytestring
+                     , bytestring
+                     , http-types
+                     , read-env-var
+                     , text
+  default-language:    Haskell2010
+  ghc-options:         -Wall -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
+  other-extensions:    QuasiQuotes
+                     , TemplateHaskell
+
+test-suite twitter-app-only-doctest
+  type:                exitcode-stdio-1.0
+  main-is:             DocTest.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , doctest
+                     , Glob
+  default-language:    Haskell2010
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+
+test-suite twitter-app-only-test
+  type:                exitcode-stdio-1.0
+  main-is:             Spec.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , tasty
+                     , tasty-hspec
+                     , tasty-hunit
+                     , twitter-app-only
+  default-language:    Haskell2010
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
+
+source-repository head
+  type:     git
+  location: git@github.com:cdepillabout/twitter-app-only.git
