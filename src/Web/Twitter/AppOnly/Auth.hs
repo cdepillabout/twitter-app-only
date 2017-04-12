@@ -15,6 +15,7 @@ module Web.Twitter.AppOnly.Auth
   , credentialsFromEnvEx
   , createOAuth2Creds
   , bearerTokenFromCreds
+  , TwitterError
   ) where
 
 import Control.FromSum (fromMaybeM)
