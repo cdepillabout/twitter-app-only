@@ -16,8 +16,10 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Web.Twitter.AppOnly
+                     , Web.Twitter.AppOnly.Api.Search
                      , Web.Twitter.AppOnly.Auth
                      , Web.Twitter.AppOnly.Error
+                     , Web.Twitter.AppOnly.Param
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , base64-bytestring
