@@ -11,20 +11,13 @@
 module Web.Twitter.AppOnly.Api.Search
   where
 
-import Control.Monad.IO.Class (MonadIO)
-import Data.Aeson (FromJSON(..), decode)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as B8
 import Data.Data (Data)
-import Data.Monoid ((<>))
 import Data.String (IsString)
 import Data.Text (Text)
 import Data.Text.Encoding (encodeUtf8)
 import Data.Typeable (Typeable)
-import Network.HTTP.Simple
-       (addRequestHeader, defaultRequest, getResponseBody, httpLBS,
-        setRequestHost, setRequestMethod, setRequestPath, setRequestPort,
-        setRequestQueryString, setRequestSecure)
 import Web.Twitter.Types (SearchResult, Status)
 
 import Web.Twitter.AppOnly.Param
